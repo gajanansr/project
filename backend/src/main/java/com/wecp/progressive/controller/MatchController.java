@@ -1,50 +1,81 @@
 package com.wecp.progressive.controller;
 
+import com.wecp.progressive.entity.Cricketer;
 import com.wecp.progressive.entity.Match;
+import com.wecp.progressive.service.impl.MatchServiceImplJpa;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/matches")
+@RequestMapping("/match")
 public class MatchController {
+
+    @Autowired
+    MatchServiceImplJpa matchServiceImplJpa;
 
     @GetMapping
     public ResponseEntity<List<Match>> getAllMatches() {
-        return ResponseEntity.ok(new ArrayList<>());
+        try {
+            List<Match> matchList = matchServiceImplJpa.getAllMatches();
+            return new ResponseEntity<>(matchList, HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{matchId}")
     public ResponseEntity<Match> getMatchById(@PathVariable int matchId) {
-        return ResponseEntity.ok(null);
+        try {
+            Match match = matchServiceImplJpa.getMatchById(matchId);
+            return new ResponseEntity<>(match, HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping
     public ResponseEntity<Integer> addMatch(@RequestBody Match match) {
-        return ResponseEntity.ok(0);
+        try {
+            int matchId = matchServiceImplJpa.addMatch(match);
+            return new ResponseEntity<>(matchId, HttpStatus.CREATED);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{matchId}")
     public ResponseEntity<Void> updateMatch(@PathVariable int matchId, @RequestBody Match match) {
-        return ResponseEntity.ok().build();
+        try {
+            match.setMatchId(matchId);
+            matchServiceImplJpa.updateMatch(match);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{matchId}")
     public ResponseEntity<Void> deleteMatch(@PathVariable int matchId) {
-        return ResponseEntity.ok().build();
+        try {
+            matchServiceImplJpa.deleteMatch(matchId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/status/{status}")
     public ResponseEntity<List<Match>> getAllMatchesByStatus(@PathVariable String status) {
-        return ResponseEntity.ok(new ArrayList<>());
+        try {
+            List<Match> matchList = matchServiceImplJpa.getAllMatchesByStatus(status);
+            return new ResponseEntity<>(matchList, HttpStatus.OK);
+        } catch (SQLException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
