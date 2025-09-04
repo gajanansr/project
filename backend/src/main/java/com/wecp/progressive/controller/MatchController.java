@@ -2,32 +2,49 @@ package com.wecp.progressive.controller;
 
 import com.wecp.progressive.entity.Match;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@RestController
+@RequestMapping("/matches")
 public class MatchController {
 
+    @GetMapping
     public ResponseEntity<List<Match>> getAllMatches() {
-        return null;
+        return ResponseEntity.ok(new ArrayList<>());
     }
 
-    public ResponseEntity<Match> getMatchById(int matchId) {
-        return null;
+    @GetMapping("/{id}")
+    public ResponseEntity<Match> getMatchById(@PathVariable int matchId) {
+        return ResponseEntity.ok(null);
     }
 
-    public ResponseEntity<Integer> addMatch(Match match) {
-        return null;
+    @PostMapping
+    public ResponseEntity<Integer> addMatch(@RequestBody Match match) {
+        return ResponseEntity.ok(0);
     }
 
-    public ResponseEntity<Void> updateMatch(int matchId, Match match) {
-        return null;
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateMatch(@PathVariable int matchId, @RequestBody Match match) {
+        return ResponseEntity.ok().build();
     }
 
-    public ResponseEntity<Void> deleteMatch(int matchId) {
-        return null;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMatch(@PathVariable int matchId) {
+        return ResponseEntity.ok().build();
     }
 
-    public ResponseEntity<List<Match>> getAllMatchesByStatus(String status) {
-        return null;
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<Match>> getAllMatchesByStatus(@PathVariable String status) {
+        return ResponseEntity.ok(new ArrayList<>());
     }
 }
