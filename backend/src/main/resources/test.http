@@ -1,0 +1,7 @@
+GET https://ec2-65-1-121-159.projects.wecreateproblems.com/proxy/5000/vote HTTP/1.1
+# Content-Type: application/json
+
+# {
+#     "email":"dhruvgupta@gmail.com",
+#     "category":"Batsman"
+# }
