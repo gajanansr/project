@@ -1,0 +1,80 @@
+<div class="match-form-container">
+    <h2>Create Match</h2>
+    <form [formGroup]="matchForm" (ngSubmit)="onSubmit()">
+      <div>
+          <label for="matchId">Match ID</label>
+          <input id="matchId" formControlName="matchId" type="number" placeholder="Enter Match ID">
+          <!-- <div *ngIf="cricketerForm.get('cricketerId')?.invalid && cricketerForm.get('cricketerId')?.touched">
+            <small class="class-error">Cricketer ID is required and must be a positive number.</small>
+          </div> -->
+      </div>
+      
+      <div>
+        <label for="firstTeamId">First Team ID</label>
+        <input id="firstTeamId" formControlName="firstTeamId" type="number" placeholder="Enter First Team ID">
+        <!-- <div *ngIf="cricketerForm.get('teamId')?.invalid && cricketerForm.get('teamId')?.touched">
+          <small class="class-error">Team ID is required and must be a positive number.</small>
+        </div> -->
+      </div>
+
+      <div>
+        <label for="secondTeamId">Second Team ID</label>
+        <input id="secondTeamId" formControlName="secondTeamId" type="number" placeholder="Enter Second Team ID">
+        <!-- <div *ngIf="cricketerForm.get('teamId')?.invalid && cricketerForm.get('teamId')?.touched">
+          <small class="class-error">Team ID is required and must be a positive number.</small>
+        </div> -->
+      </div>
+  
+      <div>
+        <label for="matchDate">Match Date</label>
+        <input id="matchDate" formControlName="matchDate" placeholder="Enter Date" type="date">
+        <!-- <div *ngIf="cricketerForm.get('cricketerName')?.invalid && cricketerForm.get('cricketerName')?.touched">
+          <small class="class-error">Cricketer Name is required and must be at least 2 characters.</small>
+        </div> -->
+      </div>
+  
+      <div>
+          <label for="venue">Venue</label>
+          <input id="venue" formControlName="venue" type="text" placeholder="Enter Venue">
+          <!-- <div *ngIf="cricketerForm.get('age')?.invalid && cricketerForm.get('age')?.touched">
+            <small class="class-error">Age is required and must be a positive number.</small>
+          </div> -->
+      </div>
+  
+      <div>
+          <label for="result">Result</label>
+          <input id="result" formControlName="result" placeholder="Enter Result" type="text">
+          <!-- <div *ngIf="cricketerForm.get('nationality')?.invalid && cricketerForm.get('nationality')?.touched">
+            <small class="class-error">Nationality is required and must be at least 2 characters.</small>
+          </div> -->
+      </div>
+  
+      <div>
+          <label for="status">Status</label>
+          <input id="status" formControlName="status" type="text" placeholder="Enter Status">
+          <!-- <div *ngIf="cricketerForm.get('experience')?.invalid && cricketerForm.get('experience')?.touched">
+            <small class="class-error">Experience is required and must be a positive number.</small>
+          </div> -->
+      </div>
+  
+      <div>
+          <label for="winnerTeamId">Winner Team ID</label>
+          <input id="winnerTeamId" formControlName="winnerTeamId" placeholder="Enter Winner Team ID" type="number">
+          <!-- <div *ngIf="cricketerForm.get('role')?.invalid && cricketerForm.get('role')?.touched">
+            <small class="class-error">Role is required and must be at least 2 characters.</small>
+          </div> -->
+      </div>
+      
+      <button type="submit" [disabled]="matchForm.invalid">Create Match</button>
+      <button type="button" (click)="resetForm()">Reset</button>
+    </form>
+  
+    <div *ngIf="successMessage" class="success">
+      <p>{{ successMessage }}</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="error">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+  

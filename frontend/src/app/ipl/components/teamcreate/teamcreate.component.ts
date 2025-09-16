@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-
+import { ReactiveFormsModule } from "@angular/forms";
 @Component({
   selector: 'app-teamcreate',
   templateUrl: './teamcreate.component.html',
   styleUrls: ['./teamcreate.component.scss'] 
 })
+
 export class TeamCreateComponent implements OnInit {
 //   team: any = {
 //     teamId: '',
