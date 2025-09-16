@@ -1,0 +1,36 @@
+<div class="ticket-booking-container">
+  <h2>Book Tickets</h2>
+
+  <form [formGroup]="ticketBookingForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="bookingId">Booking ID</label>
+      <input id="bookingId" formControlName="bookingId" type="number" placeholder="Enter Booking ID">
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" type="email" placeholder="Enter Email">
+    </div>
+
+    <div>
+      <label for="matchId">Match ID</label>
+      <input id="matchId" formControlName="matchId" type="number" placeholder="Enter Match ID">
+    </div>
+
+    <div>
+      <label for="numberOfTickets">Number of Tickets</label>
+      <input id="numberOfTickets" formControlName="numberOfTickets" type="number" placeholder="Enter Number of Tickets">
+    </div>
+
+    <button type="submit">Book Tickets</button>
+    <button type="button" (click)="resetForm()">Reset</button>
+  </form>
+
+  <div *ngIf="successMessage" class="success">
+    <p>{{ successMessage }}</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>
