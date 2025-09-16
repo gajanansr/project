@@ -1,0 +1,25 @@
+
+<div *ngIf="cricketers.length > 0; else noCricketers">
+  <button (click)="toggleCricketers()">
+    {{ showCricketers ? 'Hide Cricketers' : 'Show Cricketers' }}
+  </button>
+
+  <div *ngIf="showCricketers">
+    <div *ngFor="let cricketer of cricketers" class="cricketer-card">
+      <!-- <h3>{{ cricketer.cricketerName }}</h3> -->
+       
+      <p><strong>Name:</strong> {{ cricketer.cricketerName }}</p>
+      <p><strong>Age:</strong> {{ cricketer.age }}</p>
+      <p><strong>Nationality:</strong> {{ cricketer.nationality }}</p>
+      <p><strong>Role:</strong> {{ cricketer.role }}</p>
+      <p><strong>Total Runs:</strong> {{ cricketer.totalRuns }}</p>
+      <p><strong>Total Wickets:</strong> {{ cricketer.totalWickets }}</p>
+      <p><strong>Experience:</strong> {{ cricketer.experience }} years</p>
+      <p><strong>Team ID:</strong> {{ cricketer.teamId }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #noCricketers>
+  <p>No cricketers are available to display.</p>
+</ng-template>

@@ -1,0 +1,171 @@
+<!-- <div class="team-form-container">
+  <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="teamId">Team ID:</label>
+      <input id="teamId" formControlName="teamId" type="number" placeholder="Enter Team ID">
+      <div *ngIf="teamForm.get('teamId')?.invalid && teamForm.get('teamId')?.touched">
+        <small class="class-error">Team ID is required and must be a positive number.</small>
+        <small class="class-error" *ngIf="teamForm.get('teamId')?.errors?.['required']"></small>
+      </div>
+    </div>
+
+    <div>
+      <label for="teamName">Team Name:</label>
+      <input id="teamName" formControlName="teamName" placeholder="Enter Team name" type="text">
+      <div *ngIf="teamForm.get('teamName')?.invalid && teamForm.get('teamName')?.touched">
+        <small class="class-error">Team Name is required and must be at least 2 characters.</small>
+        <small class="class-error" *ngIf="teamForm.get('teamName')?.errors?.['required']"></small>
+      </div>
+    </div>
+
+    <div>
+      <label for="location">Team Location:</label>
+      <input id="location" formControlName="location" placeholder="Enter team location" type="text">
+      <div *ngIf="teamForm.get('location')?.invalid && teamForm.get('location')?.touched">
+        <small class="class-error">Enter a valid location</small>
+        <small class="class-error" *ngIf="teamForm.get('location')?.errors?.['required']"></small>
+
+      </div>
+    </div>
+
+    <div>
+      <label for="ownerName">Team Owner Name:</label>
+      <input id="ownerName" formControlName="ownerName" placeholder="Enter Team owner name" type="text">
+      <div *ngIf="teamForm.get('ownerName')?.invalid && teamForm.get('ownerName')?.touched">
+        <small class="class-error">Owner name is required and must be at least 2 characters</small>
+        <small class="class-error" *ngIf="teamForm.get('ownerName')?.errors?.['required']"></small>
+
+      </div>
+    </div>
+
+    <div>
+      <label for="establishmentYear">Establishment Year:</label>
+      <input type="number" formControlName="establishmentYear" id="establishmentYear" placeholder="Enter Establishment Year">
+      <div *ngIf="teamForm.get('establishmentYear')?.invalid && teamForm.get('establishmentYear')?.touched">
+        <small class="class-error">Establishment year is required and must be a valid year</small>
+        <small class="class-error" *ngIf="teamForm.get('establishmentYear')?.errors?.['required']"></small>
+      </div>
+    </div>
+    <button type="submit" [disabled]="teamForm.invalid">Create Team</button>
+    <button type="button" (click)="resetForm()">Reset Form</button>
+  </form>
+
+  <div *ngIf="successMessage" class="success">
+    <p>{{successMessage}}</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div> -->
+<!-- 
+<div class="team-form-container">
+<form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+<div>
+<label for="teamId">Team ID:</label>
+<input id="teamId" formControlName="teamId" type="number" placeholder="Enter Team ID">
+<div *ngIf="teamForm.get('teamId')?.invalid && teamForm.get('teamId')?.touched">
+<small class="class-error" *ngIf="teamForm.get('teamId')?.errors?.['required']">Team ID is required.</small>
+<small class="class-error" *ngIf="teamForm.get('teamId')?.errors?.['minLength']">Team ID must be a positive number.</small>
+</div>
+</div>
+
+<div>
+<label for="teamName">Team Name:</label>
+<input id="teamName" formControlName="teamName" placeholder="Enter Team name" type="text">
+<div *ngIf="teamForm.get('teamName')?.invalid && teamForm.get('teamName')?.touched">
+<small class="class-error" *ngIf="teamForm.get('teamName')?.errors?.['required']">Team Name is required.</small>
+<small class="class-error" *ngIf="teamForm.get('teamName')?.errors?.['minLength']">Team Name must be at least 2 characters long.</small>
+</div>
+</div>
+
+    <div>
+      <label for="location">Team Location:</label>
+      <input id="location" formControlName="location" placeholder="Enter team location" type="text">
+      <div *ngIf="teamForm.get('location')?.invalid && teamForm.get('location')?.touched">
+        <small class="class-error" *ngIf="teamForm.get('location')?.errors?.['required']">Location is required.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="ownerName">Team Owner Name:</label>
+      <input id="ownerName" formControlName="ownerName" placeholder="Enter Team owner name" type="text">
+      <div *ngIf="teamForm.get('ownerName')?.invalid && teamForm.get('ownerName')?.touched">
+        <small class="class-error" *ngIf="teamForm.get('ownerName')?.errors?.['required']">Owner Name is required.</small>
+        <small class="class-error" *ngIf="teamForm.get('ownerName')?.errors?.['minLength']">Owner Name must be at least 2 characters long.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="establishmentYear">Establishment Year:</label>
+      <input type="number" formControlName="establishmentYear" id="establishmentYear" placeholder="Enter Establishment Year">
+      <div *ngIf="teamForm.get('establishmentYear')?.invalid && teamForm.get('establishmentYear')?.touched">
+        <small class="class-error" *ngIf="teamForm.get('establishmentYear')?.errors?.['required']">Establishment Year is required.</small>
+      </div>
+    </div>
+    <button type="submit" [disabled]="teamForm.invalid">Create Team</button>
+    <button type="button" (click)="resetForm()">Reset Form</button>
+  </form>
+
+  <div *ngIf="successMessage" class="success">
+    <p>{{successMessage}}</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div> -->
+
+<div class="team-form-container">
+  <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="teamId">Team ID:</label>
+      <input id="teamId" formControlName="teamId" type="number" placeholder="Enter Team ID">
+      <div *ngIf="teamForm.get('teamId')?.invalid && teamForm.get('teamId')?.touched">
+        <small class="class-error">Team ID is required and must be a positive number.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="teamName">Team Name:</label>
+      <input id="teamName" formControlName="teamName" placeholder="Enter Team name" type="text">
+      <div *ngIf="teamForm.get('teamName')?.invalid && teamForm.get('teamName')?.touched">
+        <small class="class-error">Team Name is required and must be at least 2 characters.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="location">Team Location:</label>
+      <input id="location" formControlName="location" placeholder="Enter team location" type="text">
+      <div *ngIf="teamForm.get('location')?.invalid && teamForm.get('location')?.touched">
+        <small class="class-error">Enter a valid location</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="ownerName">Team Owner Name:</label>
+      <input id="ownerName" formControlName="ownerName" placeholder="Enter Team owner name" type="text">
+      <div *ngIf="teamForm.get('ownerName')?.invalid && teamForm.get('ownerName')?.touched">
+        <small class="class-error">Owner name is required and must be at least 2 characters</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="establishmentYear">Establishment Year:</label>
+      <input type="number" formControlName="establishmentYear" id="establishmentYear" placeholder="Enter Establishment Year">
+      <div *ngIf="teamForm.get('establishmentYear')?.invalid && teamForm.get('establishmentYear')?.touched">
+        <small class="class-error">Establishment year is required and must be a valid year</small>
+      </div>
+    </div>
+    <button type="submit" [disabled]="teamForm.invalid">Create Team</button>
+    <button type="button" (click)="resetForm()">Reset Form</button>
+  </form>
+
+  <div *ngIf="successMessage" class="success">
+    <p>{{ successMessage }}</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>
