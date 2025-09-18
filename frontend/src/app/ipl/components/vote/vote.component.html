@@ -2,39 +2,58 @@
   <h2>Submit Your Vote</h2>
 
   <form [formGroup]="voteForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="voteId">Vote ID</label>
-      <input id="voteId" formControlName="voteId" type="number" placeholder="Enter Vote ID">
-    </div>
-
+    <!-- Email field -->
     <div>
       <label for="email">Email</label>
       <input id="email" formControlName="email" type="email" placeholder="Enter Email">
+      <div *ngIf="voteForm.get('email')?.invalid && voteForm.get('email')?.touched" class="error">
+        <small>Email is required and must be valid.</small>
+      </div>
     </div>
 
+    <!-- Category selection -->
     <div>
-      <label for="category">Category</label>
-      <input id="category" formControlName="category" type="text" placeholder="Enter Category">
+      <label for="category">Category:</label>
+      <select formControlName="category">
+        <option value="">Select Category</option>
+        <option value="Cricketer">Cricketer</option>
+        <option value="Team">Team</option>
+      </select>
+      <div *ngIf="voteForm.get('category')?.invalid && voteForm.get('category')?.touched" class="error">
+        <small>Category is required.</small>
+      </div>
     </div>
 
-    <div>
-      <label for="cricketerId">Cricketer ID</label>
-      <input id="cricketerId" formControlName="cricketerId" type="number" placeholder="Enter Cricketer ID">
+    <!-- Cricketer Selection, visible only when category is Cricketer -->
+    <div *ngIf="voteForm.get('category')?.value === 'Cricketer'">
+      <label for="cricketer">Cricketer</label>
+      <select id="cricketer" formControlName="cricketer">
+        <option value="">Select a Cricketer</option>
+        <option *ngFor="let cricketer of cricketers" [ngValue]="cricketer">
+          {{ cricketer.cricketerName }}
+        </option>
+      </select>
     </div>
 
-    <div>
-      <label for="teamId">Team ID</label>
-      <input id="teamId" formControlName="teamId" type="number" placeholder="Enter Team ID">
+    <!-- Team Selection, visible only when category is Team -->
+    <div *ngIf="voteForm.get('category')?.value === 'Team'">
+      <label for="team">Team</label>
+      <select id="team" formControlName="team">
+        <option value="">Select a Team</option>
+        <option *ngFor="let team of teams" [ngValue]="team">
+          {{ team.teamName }}
+        </option>
+      </select>
     </div>
 
-    <button type="submit">Submit Vote</button>
-    <button type="button" (click)="resetForm()">Reset</button>
+    <button type="submit" [disabled]="voteForm.invalid">Submit Vote</button>
+    <a routerLink="/ipl" class="task-list" class="task-list">Dashboard</a>
   </form>
 
+  <!-- Success/Error messages -->
   <div *ngIf="successMessage" class="success">
     <p>{{ successMessage }}</p>
   </div>
-
   <div *ngIf="errorMessage" class="error">
     <p>{{ errorMessage }}</p>
   </div>

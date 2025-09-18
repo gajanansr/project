@@ -1,0 +1,27 @@
+<nav class="navbar">
+    <ul class="navbar-list">
+      <!-- No hover effect for the application name (IPL) -->
+      <li><a routerLink="/ipl" class="nav-link app-name">IPL</a></li>
+  
+      <!-- Show these options only if the user is not a 'USER' -->
+      <li *ngIf="role !== 'USER'">
+        <a routerLink="/ipl/team" class="nav-link">Add New Team</a>
+      </li>
+      <li *ngIf="role !== 'USER'">
+        <a routerLink="/ipl/cricketer" class="nav-link">Add New Cricketer</a>
+      </li>
+      <li *ngIf="role !== 'USER'">
+        <a routerLink="/ipl/match" class="nav-link">Add New Match</a>
+      </li>
+      <li *ngIf="role === 'USER'">
+        <a routerLink="/ipl/vote" class="nav-link">Vote</a>
+      </li>
+      <li *ngIf="role === 'USER'">
+        <a routerLink="/ipl/ticketbooking" class="nav-link">Book Tickets</a>
+      </li>
+    </ul>
+  
+    <!-- Logout button component -->
+  <app-logout></app-logout>
+</nav>
+  

@@ -1,0 +1,96 @@
+<div class="cricketer-form-container">
+    <h2>Update Cricketer</h2>
+  
+    <form [formGroup]="cricketerForm" (ngSubmit)="onSubmit()">
+  
+      <!-- Team ID -->
+      <div>
+        <label for="team">Team</label>
+        <select formControlName="team">
+            <option value="">Select a Team</option>
+            <option *ngFor="let team of teams" [ngValue]="team">
+              {{ team.teamName }}
+            </option>
+        </select>
+      </div>
+  
+      <!-- Cricketer Name -->
+      <div>
+        <label for="cricketerName">Cricketer Name</label>
+        <input id="cricketerName" formControlName="cricketerName" type="text" placeholder="Enter Cricketer Name">
+        <div *ngIf="cricketerForm.get('cricketerName')?.invalid && cricketerForm.get('cricketerName')?.touched" class="error">
+          <small *ngIf="cricketerForm.get('cricketerName')?.hasError('required')">Cricketer Name is required.</small>
+        </div>
+      </div>
+  
+      <!-- Age -->
+      <div>
+        <label for="age">Age</label>
+        <input id="age" formControlName="age" type="number" placeholder="Enter Age">
+        <div *ngIf="cricketerForm.get('age')?.invalid && cricketerForm.get('age')?.touched" class="error">
+          <small *ngIf="cricketerForm.get('age')?.hasError('required')">Age is required.</small>
+          <small *ngIf="cricketerForm.get('age')?.hasError('min')">Cricketer must be at least 18 years old.</small>
+        </div>
+      </div>
+  
+      <!-- Nationality -->
+      <div>
+        <label for="nationality">Nationality</label>
+        <input id="nationality" formControlName="nationality" type="text" placeholder="Enter Nationality">
+        <div *ngIf="cricketerForm.get('nationality')?.invalid && cricketerForm.get('nationality')?.touched" class="error">
+          <small *ngIf="cricketerForm.get('nationality')?.hasError('required')">Nationality is required.</small>
+        </div>
+      </div>
+  
+      <!-- Experience -->
+      <div>
+        <label for="experience">Experience</label>
+        <input id="experience" formControlName="experience" type="number" placeholder="Enter Experience">
+        <div *ngIf="cricketerForm.get('experience')?.invalid && cricketerForm.get('experience')?.touched" class="error">
+          <small *ngIf="cricketerForm.get('experience')?.hasError('required')">Experience is required.</small>
+          <small *ngIf="cricketerForm.get('experience')?.hasError('min')">Experience cannot be negative.</small>
+        </div>
+      </div>
+  
+      <!-- Role -->
+      <div>
+        <label for="role">Role</label>
+        <input id="role" formControlName="role" type="text" placeholder="Enter Role">
+        <div *ngIf="cricketerForm.get('role')?.invalid && cricketerForm.get('role')?.touched" class="error">
+          <small *ngIf="cricketerForm.get('role')?.hasError('required')">Role is required.</small>
+        </div>
+      </div>
+  
+      <!-- Total Runs -->
+      <div>
+        <label for="totalRuns">Total Runs</label>
+        <input id="totalRuns" formControlName="totalRuns" type="number" placeholder="Enter Total Runs">
+        <div *ngIf="cricketerForm.get('totalRuns')?.invalid && cricketerForm.get('totalRuns')?.touched" class="error">
+          <small *ngIf="cricketerForm.get('totalRuns')?.hasError('min')">Total Runs cannot be negative.</small>
+        </div>
+      </div>
+  
+      <!-- Total Wickets -->
+      <div>
+        <label for="totalWickets">Total Wickets</label>
+        <input id="totalWickets" formControlName="totalWickets" type="number" placeholder="Enter Total Wickets">
+        <div *ngIf="cricketerForm.get('totalWickets')?.invalid && cricketerForm.get('totalWickets')?.touched" class="error">
+          <small *ngIf="cricketerForm.get('totalWickets')?.hasError('min')">Total Wickets cannot be negative.</small>
+        </div>
+      </div>
+  
+      <!-- Submit and Reset Buttons -->
+      <button type="submit" [disabled]="cricketerForm.invalid">Update Cricketer</button>
+      <a routerLink="/ipl" class="task-list" class="task-list">Dashboard</a>
+    </form>
+  
+    <!-- Display success or error messages -->
+    <div *ngIf="successMessage" class="success">
+      <p>{{ successMessage }}</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="error">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,59 @@
+<div class="team-form-container">
+    <h2>Update Team</h2>
+    <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Team Name Field -->
+      <div>
+        <label for="teamName">Team Name:</label>
+        <input id="teamName" formControlName="teamName" type="text" placeholder="Enter Team Name" />
+        <div *ngIf="teamForm.get('teamName')?.invalid && teamForm.get('teamName')?.touched" class="error">
+          <small *ngIf="teamForm.get('teamName')?.hasError('required')">Team Name is required.</small>
+          <small *ngIf="teamForm.get('teamName')?.hasError('pattern')">Team Name must not contain special characters.</small>
+        </div>
+      </div>
+  
+      <!-- Location Field -->
+      <div>
+        <label for="location">Location:</label>
+        <input id="location" formControlName="location" type="text" placeholder="Enter Location" />
+        <div *ngIf="teamForm.get('location')?.invalid && teamForm.get('location')?.touched" class="error">
+          <small *ngIf="teamForm.get('location')?.hasError('required')">Location is required.</small>
+        </div>
+      </div>
+  
+      <!-- Owner Name Field -->
+      <div>
+        <label for="ownerName">Owner Name:</label>
+        <input id="ownerName" formControlName="ownerName" type="text" placeholder="Enter Owner Name" />
+        <div *ngIf="teamForm.get('ownerName')?.invalid && teamForm.get('ownerName')?.touched" class="error">
+          <small *ngIf="teamForm.get('ownerName')?.hasError('required')">Owner Name is required.</small>
+          <small *ngIf="teamForm.get('ownerName')?.hasError('minlength')">Owner Name must be at least 2 characters long.</small>
+        </div>
+      </div>
+  
+      <!-- Establishment Year Field -->
+      <div>
+        <label for="establishmentYear">Establishment Year:</label>
+        <input id="establishmentYear" formControlName="establishmentYear" type="number" placeholder="Enter Establishment Year" />
+        <div *ngIf="teamForm.get('establishmentYear')?.invalid && teamForm.get('establishmentYear')?.touched" class="error">
+          <small *ngIf="teamForm.get('establishmentYear')?.hasError('required')">Establishment Year is required.</small>
+          <small *ngIf="teamForm.get('establishmentYear')?.hasError('min')">Establishment Year must be at least 1900.</small>
+          <small *ngIf="teamForm.get('establishmentYear')?.hasError('max')">Establishment Year cannot be later than {{ currentYear }}.</small>
+        </div>
+      </div>
+  
+      <!-- Submit and Reset Buttons -->
+      <button type="submit" [disabled]="teamForm.invalid">Update Team</button>
+      <a routerLink="/ipl" class="task-list" class="task-list">Dashboard</a>
+    </form>
+  
+    <!-- Success and Error Messages -->
+    <div *ngIf="successMessage" class="success">
+      <p>{{ successMessage }}</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="error">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+  

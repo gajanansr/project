@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: "team", component: TeamCreateComponent },
   { path: "match", component: MatchCreateComponent },
   { path: "cricketer", component: CricketerCreateComponent },
-  { path: "team/edit", component: TeamEditComponent },
-  { path: "match/edit", component: MatchEditComponent },
-  { path: "cricketer/edit", component: CricketerEditComponent },
+  { path: "team/edit/:teamId", component: TeamEditComponent },
+  { path: "match/edit/:matchId", component: MatchEditComponent },
+  { path: "cricketer/edit/:cricketerId", component: CricketerEditComponent },
   { path: "vote", component: VoteComponent },
   { path: "ticketbooking", component: TicketBookingComponent }
 ];

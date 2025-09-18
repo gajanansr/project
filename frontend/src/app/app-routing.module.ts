@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CricketerCreateComponent } from './ipl/components/cricketercreate/cricketercreate.component';
 
 const routes: Routes = [
   {
