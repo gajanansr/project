@@ -3,11 +3,11 @@ package com.wecp.progressive.controller;
 import com.wecp.progressive.entity.Cricketer;
 import com.wecp.progressive.entity.Match;
 import com.wecp.progressive.exception.NoMatchesFoundException;
-import com.wecp.progressive.exception.TeamAlreadyExistsException;
 import com.wecp.progressive.service.impl.MatchServiceImplJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.web.server.ServerHttpSecurity.HttpsRedirectSpec;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -72,14 +72,15 @@ public class MatchController {
     }
 
     @GetMapping("/status/{status}")
-    public ResponseEntity<?> getAllMatchesByStatus(@PathVariable String status) {
+    public ResponseEntity<List<Match>> getAllMatchesByStatus(@PathVariable String status) {
         try {
             List<Match> matchList = matchServiceImplJpa.getAllMatchesByStatus(status);
             return new ResponseEntity<>(matchList, HttpStatus.OK);
-        } catch (NoMatchesFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);  // No Team found
-        } catch (Exception e) {
-            return new ResponseEntity<>("An unexpected error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);  // Generic error handling
+        }catch(NoMatchesFoundException n){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } 
+        catch (SQLException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

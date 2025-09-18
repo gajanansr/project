@@ -18,11 +18,11 @@ public interface TicketBookingRepository extends JpaRepository<TicketBooking, In
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM TicketBooking t WHERE t.match.matchId IN (SELECT m.matchId FROM Match m WHERE m.firstTeam.teamId = :teamId OR m.secondTeam.teamId = :teamId)")
+    @Query("DELETE FROM TicketBooking t WHERE t.match.matchId IN (SELECT m.matchId FROM matches m WHERE m.firstTeam.teamId = :teamId OR m.secondTeam.teamId = :teamId)")
     void deleteByTeamId(@Param("teamId") int teamId);
     
     @Modifying
     @Transactional
-    @Query("DELETE FROM TicketBooking t WHERE t.match.matchId = :matchId")
+    @Query("DELETE FROM TicketBooking t WHERE t.match.matchId IN :matchId")
     void deleteByMatchId(@Param("matchId") int matchId);
 }

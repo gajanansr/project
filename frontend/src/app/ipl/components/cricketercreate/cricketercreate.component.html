@@ -1,41 +1,61 @@
-<form [formGroup]="cricketerForm" (ngSubmit)="onSubmit()">
-  <div *ngFor="let field of ['cricketerId', 'teamId', 'cricketerName', 'nationality', 'role']">
-    <label>{{ field }}:</label>
-    <input [formControlName]="field" />
-    <small *ngIf="cricketerForm.get(field)?.touched && cricketerForm.get(field)?.invalid">Required</small>
+<div class="cricketer-form-container">
+  <h2>Create Cricketer</h2>
+  
+  <form [formGroup]="cricketerForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="cricketerId">Cricketer ID</label>
+      <input id="cricketerId" formControlName="cricketerId" type="number" placeholder="Enter Cricketer ID">
+    </div>
+    
+    <div>
+      <label for="teamId">Team ID</label>
+      <input id="teamId" formControlName="teamId" type="number" placeholder="Enter Team ID">
+    </div>
+
+    <div>
+      <label for="cricketerName">Cricketer Name</label>
+      <input id="cricketerName" formControlName="cricketerName" type="text" placeholder="Enter Cricketer Name">
+    </div>
+    
+    <div>
+      <label for="age">Age</label>
+      <input id="age" formControlName="age" type="number" placeholder="Enter Age">
+    </div>
+
+    <div>
+      <label for="nationality">Nationality</label>
+      <input id="nationality" formControlName="nationality" type="text" placeholder="Enter Nationality">
+    </div>
+
+    <div>
+      <label for="experience">Experience</label>
+      <input id="experience" formControlName="experience" type="number" placeholder="Enter Experience">
+    </div>
+
+    <div>
+      <label for="role">Role</label>
+      <input id="role" formControlName="role" type="text" placeholder="Enter Role">
+    </div>
+
+    <div>
+      <label for="totalRuns">Total Runs</label>
+      <input id="totalRuns" formControlName="totalRuns" type="number" placeholder="Enter Total Runs">
+    </div>
+
+    <div>
+      <label for="totalWickets">Total Wickets</label>
+      <input id="totalWickets" formControlName="totalWickets" type="number" placeholder="Enter Total Wickets">
+    </div>
+
+    <button type="submit">Create Cricketer</button>
+    <button type="button" (click)="resetForm()">Reset</button>
+  </form>
+
+  <div *ngIf="successMessage" class="success">
+      <p>{{ successMessage }}</p>
   </div>
-
-  <div>
-    <label>Age:</label>
-    <input type="number" formControlName="age" />
-    <small *ngIf="cricketerForm.get('age')?.errors?.['min']">Must be at least 15.</small>
+  
+  <div *ngIf="errorMessage" class="error">
+      <p>{{ errorMessage }}</p>
   </div>
-
-  <div>
-    <label>Experience:</label>
-    <input type="number" formControlName="experience" />
-    <small *ngIf="cricketerForm.get('experience')?.errors?.['min']">Experience cannot be negative.</small>
-  </div>
-
-  <div>
-    <label>Total Runs:</label>
-    <input type="number" formControlName="totalRuns" />
-  </div>
-
-  <div>
-    <label>Total Wickets:</label>
-    <input type="number" formControlName="totalWickets" />
-  </div>
-
-  <div>
-    <label>Email:</label>
-    <input formControlName="email" />
-    <small *ngIf="cricketerForm.get('email')?.errors?.['email']">Invalid email address.</small>
-  </div>
-
-  <button type="submit">Create Cricketer</button>
-  <button type="button" (click)="resetForm()">Reset</button>
-
-  <p *ngIf="successMessage">{{ successMessage }}</p>
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-</form>
+</div>

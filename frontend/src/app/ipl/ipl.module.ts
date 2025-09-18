@@ -8,17 +8,24 @@ import { TeamCreateComponent } from "./components/teamcreate/teamcreate.componen
 import { CricketerCreateComponent } from "./components/cricketercreate/cricketercreate.component";
 import { MatchCreateComponent } from "./components/matchcreate/matchcreate.component";
 import { Match } from "./types/Match";
+import { RouterModule } from "@angular/router";
+import { TicketBookingComponent } from "./components/ticketbooking/ticketbooking.component";
+import { VoteComponent } from "./components/vote/vote.component";
 
 @NgModule({
   declarations: [
     TeamCreateComponent,
     CricketerCreateComponent,
     MatchCreateComponent,
+    TicketBookingComponent,
+    VoteComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    IplRoutingModule,
+    RouterModule
   ],
   exports: [
     

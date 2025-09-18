@@ -9,7 +9,7 @@ public interface TicketBookingService {
 
     int createBooking(TicketBooking ticketBooking);
 
-    void cancelBooking(Integer bookingId);
+    void cancelBooking(int bookingId);
 
     List<TicketBooking> getBookingsByUserEmail(String email);
 

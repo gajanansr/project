@@ -1,54 +1,62 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Cricketer } from '../../types/Cricketer';
+// import { passwordValidator, usernameValidator } from './validators'; // Adjust the import path as needed
 
 @Component({
-  selector: 'app-cricketer-create',
-  templateUrl: './cricketercreate.component.html',
-  styleUrls: ['./cricketercreate.component.scss']
+    selector: 'app-cricketercreate',
+      templateUrl: './cricketercreate.component.html',
+      styleUrls: ['./cricketercreate.component.scss']
 })
-export class CricketerCreateComponent {
-  cricketerForm: FormGroup;
-  successMessage = '';
-  errorMessage = '';
+export class CricketerCreateComponent implements OnInit {
+  cricketerForm!: FormGroup;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
+  cricketer!:Cricketer;
+  constructor(private formBuilder: FormBuilder) {}
 
-  constructor(private fb: FormBuilder) {
-    this.cricketerForm = this.fb.group({
-      cricketerId: ['', Validators.required],
-      teamId: ['', Validators.required],
-      cricketerName: ['', Validators.required],
-      age: ['', [Validators.required, Validators.min(15)]],
+  ngOnInit(): void {
+    this.cricketerForm = this.formBuilder.group({
+      cricketerId: [null, Validators.required],
+      teamId: [null, Validators.required],
+      cricketerName: ['', [Validators.required, this.usernameValidator()]],
+      age: [null, [Validators.required, Validators.min(18)]],
       nationality: ['', Validators.required],
-      experience: ['', [Validators.required, Validators.min(0)]],
+      experience: [null, [Validators.required, Validators.min(0)]], // Ensure non-negative experience
       role: ['', Validators.required],
-      totalRuns: ['', [Validators.required, Validators.min(0)]],
-      totalWickets: ['', [Validators.required, Validators.min(0)]],
-      email: ['', [Validators.required, Validators.email]]
+      totalRuns: [null, Validators.min(0)],
+      totalWickets: [null, Validators.min(0)]
     });
   }
 
-  onSubmit() {
-    if (this.cricketerForm.invalid) {
-      this.errorMessage = 'Please correct the form errors.';
-      return;
-    }
-
-    const { cricketerName } = this.cricketerForm.value;
-    if (this.simulateBackendError(cricketerName)) {
-      this.errorMessage = 'Backend Error: Cricketer already exists.';
-      return;
-    }
-
-    console.log('Cricketer Data:', this.cricketerForm.value);
-    this.successMessage = 'Cricketer created successfully!';
-    this.errorMessage = '';
-    this.resetForm();
+usernameValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const username = control.value;
+      if (!username) {
+        return null;
+      }
+      const hasSpecialChar = /[^a-zA-Z0-9]/.test(username);
+      if (hasSpecialChar) {
+        return { 'usernameInvalid': true };
+      }
+      return null;
+    };
   }
 
-  simulateBackendError(name: string): boolean {
-    return name.toLowerCase() === 'errorplayer';
+  onSubmit(): void {
+    if (this.cricketerForm.valid) {
+      this.cricketer = this.cricketerForm.value
+      this.successMessage = 'Cricketer created successfully!';
+      console.log(this.cricketerForm.value);
+      this.resetForm();
+      this.errorMessage = null;
+    } else {
+      this.errorMessage = 'Please fill out all required fields correctly.';
+      this.successMessage = null;
+    }
   }
 
-  resetForm() {
+  resetForm(): void {
     this.cricketerForm.reset();
   }
 }

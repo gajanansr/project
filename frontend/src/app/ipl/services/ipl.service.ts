@@ -8,7 +8,6 @@ import { Match } from "../types/Match";
 import { Vote } from "../types/Vote";
 import { TicketBooking } from "../types/TicketBooking";
 
-
 @Injectable({
   providedIn: "root",
 })
@@ -140,7 +139,7 @@ export class IplService {
     
   cancelBooking(bookingId: number): Observable<any> {
     // Implementation goes here
-    return new Observable<>();
+    return new Observable<any>();
   }
 
   getBookingsByUserEmail(email: string): Observable<TicketBooking[]> {

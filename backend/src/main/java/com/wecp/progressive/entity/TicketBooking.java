@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -13,17 +12,16 @@ public class TicketBooking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer bookingId;
+    private int bookingId;
 
-    @ManyToOne
-    @JoinColumn(name = "match_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Match match;
 
     private String email;
 
     private int numberOfTickets;
 
-    public TicketBooking(Integer bookingId,  String email, Match match,int numberOfTickets) {
+    public TicketBooking(int bookingId, Match match, String email, int numberOfTickets) {
         this.bookingId = bookingId;
         this.match = match;
         this.email = email;
@@ -33,11 +31,11 @@ public class TicketBooking {
     public TicketBooking() {
     }
 
-    public Integer getBookingId() {
+    public int getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(Integer bookingId) {
+    public void setBookingId(int bookingId) {
         this.bookingId = bookingId;
     }
 

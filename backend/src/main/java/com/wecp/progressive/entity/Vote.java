@@ -1,6 +1,13 @@
 package com.wecp.progressive.entity;
 
-import javax.persistence.*;
+import javax.annotation.Generated;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Vote {
@@ -8,6 +15,7 @@ public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int voteId;
+
     private String email;
     private String category;
 
@@ -18,8 +26,9 @@ public class Vote {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "team_id")
     private Team team;
-    public Vote() {
-    }
+
+    public Vote(){}
+
     public Vote(int voteId, String email, String category, Cricketer cricketer, Team team) {
         this.voteId = voteId;
         this.email = email;
@@ -27,6 +36,7 @@ public class Vote {
         this.cricketer = cricketer;
         this.team = team;
     }
+
     public int getVoteId() {
         return voteId;
     }

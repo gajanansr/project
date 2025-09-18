@@ -26,7 +26,7 @@ public class TicketBookingServiceImpl implements TicketBookingService{
     }
 
     @Override
-    public void cancelBooking(Integer bookingId) {
+    public void cancelBooking(int bookingId) {
         ticketBookingRepository.deleteById(bookingId);
     }
 
