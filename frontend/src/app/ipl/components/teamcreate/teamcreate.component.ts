@@ -1,54 +1,50 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ReactiveFormsModule } from "@angular/forms";
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 @Component({
-  selector: 'app-teamcreate',
+  selector: 'app-team-create',
   templateUrl: './teamcreate.component.html',
-  styleUrls: ['./teamcreate.component.scss'] 
+  styleUrls: ['./teamcreate.component.scss']
 })
-
-export class TeamCreateComponent implements OnInit {
-//   team: any = {
-//     teamId: '',
-//     teamName: '',
-//     location: '',
-//     ownerName: '',
-//     establishmentYear: ''
-//   };
-
+export class TeamCreateComponent {
   teamForm: FormGroup;
-  successMessage: string | null = null;
-  errorMessage: string | null = null;
+  successMessage = '';
+  errorMessage = '';
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder) {
     this.teamForm = this.fb.group({
-      teamId: [null, [Validators.required, Validators.minLength(1)]],
-      teamName: ['', [Validators.required, Validators.minLength(2)]],
+      teamId: ['', Validators.required],
+      teamName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]+$')]],
       location: ['', Validators.required],
-      ownerName: ['', [Validators.required, Validators.minLength(2)]],
-      establishmentYear: [null, Validators.required]
+      ownerName: ['', Validators.required],
+      establishmentYear: ['', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]]
     });
   }
 
-  onSubmit(): void {
-    if (this.teamForm.valid) {
-      this.successMessage = 'Team has been successfully created!';
-      this.errorMessage = null;
-      console.log('Team Created: ', this.teamForm.value);
-    } else {
-      this.errorMessage = 'Please fill out all required fields correctly.';
-      this.successMessage = null;
+  onSubmit() {
+    if (this.teamForm.invalid) {
+      this.errorMessage = 'Please fix the errors in the form.';
+      return;
     }
+
+    const { teamName } = this.teamForm.value;
+    if (this.simulateBackendError(teamName)) {
+      this.errorMessage = 'Backend Error: Team name already exists.';
+      return;
+    }
+
+    console.log('Team Data:', this.teamForm.value);
+    this.successMessage = 'Team created successfully!';
+    this.errorMessage = '';
+    this.resetForm();
   }
 
-  resetForm(): void {
+  simulateBackendError(teamName: string): boolean {
+    return teamName.toLowerCase() === 'invalidteam';
+  }
+
+  resetForm() {
     this.teamForm.reset({
-      teamId: null,
-      teamName: '',
-      location: '',
-      ownerName: '',
       establishmentYear: new Date().getFullYear()
     });
   }

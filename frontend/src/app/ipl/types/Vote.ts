@@ -6,9 +6,6 @@ export class Vote {
     cricketerId:number;
     teamId:number;
  
-   
- 
- 
     constructor( voteId:number,
         email:string,
         category:string,
@@ -19,10 +16,7 @@ export class Vote {
           this.category=category;
           this.cricketerId=cricketerId;
           this.teamId=teamId;
- 
-         
- 
-         
+    
       }
  
       displayInfo(){

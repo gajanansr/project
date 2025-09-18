@@ -7,6 +7,7 @@ import com.wecp.progressive.repository.TicketBookingRepository;
 import com.wecp.progressive.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -44,13 +45,16 @@ public class MatchServiceImplJpa implements MatchService {
         matchRepository.save(match);
     }
 
+    @Transactional
     @Override
     public void deleteMatch(int matchId) throws SQLException {
+        ticketBookingRepository.deleteByMatchId(matchId);
         matchRepository.deleteById(matchId);
     }
 
     @Override
-    public List<Match> getAllMatchesByStatus(String status) throws SQLException {
+    public List<Match> getAllMatchesByStatus(String status) throws NoMatchesFoundException
+     {
         if(matchRepository.findAll().isEmpty())
         {
             throw new NoMatchesFoundException("no match found");

@@ -5,10 +5,7 @@ export class TicketBooking {
     matchId:number;
     numberOfTickets:number;
  
-   
- 
- 
-    constructor(    bookingId:number,
+  constructor(    bookingId:number,
         email:string,
         matchId:number,
         numberOfTickets:number){
@@ -16,9 +13,7 @@ export class TicketBooking {
           this.email=email;
           this.matchId=matchId;
           this.numberOfTickets=numberOfTickets;
-         
- 
-         
+       
       }
  
       displayInfo(){

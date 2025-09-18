@@ -3,32 +3,30 @@ package com.wecp.progressive.entity;
 import javax.persistence.*;
 import java.util.Date;
 
-// Since "match" is a reserved word in mysql, using table name as "matches"
-@Entity(name = "matches")
+
+@Entity
+@Table(name = "matches")
 public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int matchId;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "first_team_id")
+    @ManyToOne
+    @JoinColumn(name = "first_team_id",referencedColumnName = "teamId")
     private Team firstTeam;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "second_team_id")
+    @ManyToOne
+    @JoinColumn(name = "second_team_id", referencedColumnName = "teamId")
     private Team secondTeam;
 
-    @Temporal(TemporalType.DATE)
+    
     private Date matchDate;
-
     private String venue;
     private String result;
     private String status;
-
     @ManyToOne
-    @JoinColumn(name = "winner_team_id")
+    @JoinColumn(name = "winner_team_id",referencedColumnName = "teamId")
     private Team winnerTeam;
-
     public Match() {
     }
 
@@ -67,14 +65,6 @@ public class Match {
         this.secondTeam = secondTeam;
     }
 
-    public Team getWinnerTeam() {
-        return winnerTeam;
-    }
-
-    public void setWinnerTeam(Team winnerTeam) {
-        this.winnerTeam = winnerTeam;
-    }
-
     public Date getMatchDate() {
         return matchDate;
     }
@@ -106,5 +96,16 @@ public class Match {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public Team getWinnerTeam() {
+        return winnerTeam;
+    }
+
+    public void setWinnerTeam(Team winnerTeam) {
+        this.winnerTeam = winnerTeam;
+    }
+
+
+    
 
 }

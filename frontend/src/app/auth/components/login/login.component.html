@@ -1,0 +1,35 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label>Username:</label>
+    <input formControlName="username" />
+    <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+      <small *ngIf="loginForm.get('username')?.errors?.['required']">
+        Username is required.
+      </small>
+      <small *ngIf="loginForm.get('username')?.errors?.['pattern']">
+        Username cannot contain special characters.
+      </small>
+    </div>
+  </div>
+
+
+  <div>
+    <label>Password:</label>
+    <input type="password" formControlName="password" />
+    <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+      <small *ngIf="loginForm.get('password')?.errors?.['required']">
+        Password is required.
+      </small>
+      <small *ngIf="loginForm.get('password')?.errors?.['pattern']">
+        Password must contain at least 8 characters, one uppercase, and one number.
+      </small>
+    </div>
+  </div>
+
+  <button type="submit">Login</button>
+
+
+  <p *ngIf="successMessage" style="color: green">{{ successMessage }}</p>
+  <p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
+</form>

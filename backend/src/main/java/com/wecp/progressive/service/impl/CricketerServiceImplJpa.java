@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 public class CricketerServiceImplJpa implements CricketerService {
 
-    
     private CricketerRepository cricketerRepository;
 
     @Autowired
@@ -33,10 +32,9 @@ public class CricketerServiceImplJpa implements CricketerService {
 
     @Override
     public Integer addCricketer(Cricketer cricketer) throws TeamCricketerLimitExceededException {
-        Long noOfCricketers = cricketerRepository.countByTeam_TeamId(cricketer.getTeam().getTeamId());
-        if(noOfCricketers == 11)
-        {
-            throw new TeamCricketerLimitExceededException("already 11 cricekters");
+        Long totalCricketersInTeam = cricketerRepository.countByTeam_TeamId(cricketer.getTeam().getTeamId());
+        if (totalCricketersInTeam == 11) {
+            throw new TeamCricketerLimitExceededException("Team = " + cricketer.getTeam().getTeamId() + " already has reached its maximum limit of 11 cricketers");
         }
         return cricketerRepository.save(cricketer).getCricketerId();
     }
