@@ -1,0 +1,30 @@
+<div class="cricketer-list-container">
+    <h2>Cricketer List</h2>
+  
+    <!-- Button to toggle cricketer data visibility -->
+    <button (click)="toggleCricketers()">
+      {{ showCricketers ? 'Hide' : 'Show' }} Cricketers
+    </button>
+  
+    <!-- ngIf to conditionally display the cricketer list -->
+    <div *ngIf="showCricketers">
+      <ul>
+        <!-- ngFor to loop over cricketers and display details -->
+        <li *ngFor="let cricketer of cricketers">
+          <h3>{{ cricketer.cricketerName }} ({{ cricketer.age }} years old)</h3>
+          <p>Nationality: {{ cricketer.nationality }}</p>
+          <p>Role: {{ cricketer.role }}</p>
+          <p>Total Runs: {{ cricketer.totalRuns }}</p>
+          <p>Total Wickets: {{ cricketer.totalWickets }}</p>
+          <p>Experience: {{ cricketer.experience }} years</p>
+          <p>Team ID: {{ cricketer.teamId }}</p>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Message when there are no cricketers to display -->
+    <div *ngIf="cricketers.length === 0">
+      <p>No cricketers available to display.</p>
+    </div>
+  </div>
+  

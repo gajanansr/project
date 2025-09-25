@@ -1,22 +1,40 @@
-import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { map, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { User } from "../../ipl/types/User";
+import { environment } from "src/environments/environment";
+import { Injectable } from "@angular/core";
 
+@Injectable({
+  providedIn: "root",
+})
 export class AuthService {
+   private loginUrl = `${environment.apiUrl}`;
+  // private loginUrl = `http://localhost:8080`;
+
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
 
   constructor(private http: HttpClient) {}
 
   login(user: Partial<User>): Observable<{ [key: string]: string }> {
-    return new Observable();
+    return this.http.post<{ token: string }>(
+      `${this.loginUrl}/user/login`,
+      user,
+      this.httpOptions
+    );
   }
 
-  getToken() : string {
-    return '';
+  getToken() {
+    return localStorage.getItem("token");
   }
 
-  getRole() : string {
-    return '';
+  getRole() {
+    return localStorage.getItem("role");
   }
 
   getUsers(): Observable<User[]> {
@@ -24,6 +42,6 @@ export class AuthService {
   }
 
   createUser(user: User): Observable<User> {
-    return new Observable();
+    return this.http.post<User>(`${this.loginUrl}/user/register`, user);
   }
 }

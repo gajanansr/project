@@ -1,0 +1,32 @@
+<div class="login-form-container">
+  
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <h2>Login</h2>
+      <div>
+        <label for="username">Username</label>
+        <input id="username" formControlName="username" type="text" placeholder="Enter Username">
+        <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error">
+          <small *ngIf="loginForm.get('username')?.hasError('required')">Username is required.</small>
+          <small *ngIf="loginForm.get('username')?.hasError('pattern')">Username cannot contain special characters.</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="password">Password</label>
+        <input id="password" formControlName="password" type="password" placeholder="Enter Password">
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error">
+          <small *ngIf="loginForm.get('password')?.hasError('required')">Password is required.</small>
+          <small *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 8 characters long.</small>
+          <small *ngIf="loginForm.get('password')?.hasError('pattern')">Password must contain at least one capital letter and one numeric digit.</small>
+        </div>
+      </div>
+  
+      <button type="submit">Login</button>
+      <a routerLink="/auth/register" class="task-list">Sign up</a>
+      <div *ngIf="errorMessage" class="error">
+        <p>{{ errorMessage }}</p>
+      </div>
+    </form>
+  
+  </div>
+  

@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="card">
+        <div class="row">
+            <div class="col-12">
+                <div class="card-header">
+                    <h1 style="text-align: center;">Register</h1>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm" class="user-form">
+  
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" formControlName="username" class="form-control" />
+                            <div *ngIf="registrationForm.get('username')?.invalid && (registrationForm.get('username')?.touched )"
+                                class="error">
+                                <small *ngIf="registrationForm.get('username')?.hasError('required')">Username is
+                                    required.</small>
+                                <small *ngIf="registrationForm.get('username')?.hasError('specialCharacters')">Username cannot
+                                    contain special characters.</small>
+                            </div>
+                        </div>
+  
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" formControlName="password" class="form-control" />
+                            <div *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.touched )"
+                                class="error">
+                                <small *ngIf="registrationForm.get('password')?.hasError('required')">Password is
+                                    required.</small>
+                                <small *ngIf="registrationForm.get('password')?.hasError('minlength')">Password must be at least
+                                    8 characters long.</small>
+                            </div>
+                        </div>
+  
+                        <div class="form-group">
+                            <label for="fullName">Full Name:</label>
+                            <input type="text" id="fullName" formControlName="fullName" class="form-control" />
+                            <div *ngIf="registrationForm.get('fullName')?.invalid && (registrationForm.get('fullName')?.touched )"
+                                class="error">
+                                <small *ngIf="registrationForm.get('fullName')?.hasError('required')">Full Name is
+                                    required.</small>
+                            </div>
+                        </div>
+  
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" formControlName="email" class="form-control" />
+                            <div *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.touched )"
+                                class="error">
+                                <small *ngIf="registrationForm.get('email')?.hasError('required')">Email is required.</small>
+                                <small *ngIf="registrationForm.get('email')?.hasError('email')">Please enter a valid email
+                                    address.</small>
+                            </div>
+                        </div>
+  
+                        <div class="form-group">
+                            <label for="role">Role:</label>
+                            <select formControlName="role" class="form-control">
+                                <option value="USER">User</option>
+                                <option value="ADMIN">Admin</option>
+                            </select>
+                            <div *ngIf="registrationForm.get('role')?.invalid && (registrationForm.get('role')?.touched )"
+                                class="error">
+                                <small *ngIf="registrationForm.get('role')?.hasError('required')">Role is required.</small>
+                            </div>
+                        </div>
+  
+                        <button type="submit" class="btn-submit">Create User</button>
+  
+                        <ng-container>
+                            <div *ngIf="successMessage" class="success">
+                                <p>{{ successMessage }}</p>
+                            </div>
+                            <div *ngIf="errorMessage" class="error">
+                                <p>{{ errorMessage }}</p>
+                            </div>
+                        </ng-container>
+  
+                        <a routerLink="/auth" class="task-list">Login</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
