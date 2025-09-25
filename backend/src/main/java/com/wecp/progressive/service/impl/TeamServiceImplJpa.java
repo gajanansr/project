@@ -3,12 +3,10 @@ package com.wecp.progressive.service.impl;
 import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wecp.progressive.dao.TeamDAO;
 import com.wecp.progressive.entity.Team;
 import com.wecp.progressive.exception.TeamAlreadyExistsException;
 import com.wecp.progressive.exception.TeamDoesNotExistException;
@@ -72,7 +70,9 @@ public class TeamServiceImplJpa  implements TeamService {
 
     @Override
     public void updateTeam(Team team) throws SQLException {
-        if(teamRepository.findByTeamName(team.getTeamName()) != null){
+        // Check if another team with the same name exists (excluding the current team)
+        Team existingTeam = teamRepository.findByTeamName(team.getTeamName());
+        if(existingTeam != null && existingTeam.getTeamId() != team.getTeamId()){
             throw new TeamAlreadyExistsException("Team with same name exists");
         }
         teamRepository.save(team);
