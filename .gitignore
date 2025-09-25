@@ -1,0 +1,10 @@
+**/target/
+**/node_modules/
+.vscode
+resolv.sh
+initialize-github.sh
+frontend/.angular
+backend/src/test/
+frontend/src/test/
+backend-tests.log
+frontend-tests.log
